@@ -1,0 +1,11 @@
+There is different concept for detecting cycle in Directed graphs, as checking for the closed loop is not the factor for cycle detection.
+Because a closed is only formed when the direction of all the nodes are making a circular loop. So the concept of checking the
+parent is not applicable(that is if the parent of the adjacent node is different then it means there is a loop.)
+
+So in BFS we will use Kahn's algorithm for detecting the cycle, as for Kahn's algorithm the graph need to be a DAG.
+So we can reverse the concept of for using Kahn's algorithm i.e topological sort graph need to be DAG, so we can use it
+as if the graph is not sorted topologically then it is cyclic.
+
+Algorithm:
+1.Apply Kahn's algorithm.
+2.Check at last if the number of elements pushed to queue is same as the total number of vertices or not.

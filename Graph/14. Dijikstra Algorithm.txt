@@ -1,0 +1,58 @@
+1. This algorithm is a single source shortest path (SSS).
+
+2. In this priority queue plays the major role, by using the priority queue which always return the minimum element as in backend
+it is implemented using min-heap.
+
+3. The Dijkstra Implementation work even if simple Queue is used instead of priority queue. It is so because using a 
+priority queue will only affect efficiency
+
+4. While the original algorithm uses a min-priority queue and runs in time Θ((V+E)logV) 
+(where V is the number of nodes and E is the number of edges), it can also be implemented in Θ(V*V) using an array.
+
+5. The basic idea behind Dijkstra is that to use the priority queue, and get the node with minimum distance and
+traverse all its neighbour.
+
+6. In priority queue, store the data in the form (distance, node) as we need to get the minimum distance, as distance
+is the priority. If in the data in this format (node, distance) is stored then there might be possibility that the nodes
+with the smallest distance is not fetched.
+
+7. Like node 5 is having 2 distance 4 and 7, so as per the 1st format the data stored in the priority queue is(4, 5) and (7, 5)
+So in this format shortest distance with node 5 is fetched i.e (4, 5) 
+
+8. But as per the 2nd format the data stored is (5, 4) and (5, 7). As the data is stored according to the 1st parameter otherwise
+stored as per the input order. so 1st order will be used.
+
+9.Breadth-first search can be viewed as a special-case of Dijkstra's algorithm on unweighted graphs, 
+where the priority queue degenerates into a FIFO queue.
+
+10. For the infinite graphs or too long graphs UCS(Uniform Cost search) algorithm is used.
+
+11. Dijkstra's algorithm is a really efficient algorithm for the SSSP problem when the edges are non-negative. Dijkstra's algorithm does 
+not work in the presence of negative edges (zero-weight edges are fine). If G contains negative edges, we should use the 
+Bellman-Ford algorithm instead.
+
+12. Amortized time means that it could take more time, but, if we average out the times for that operation 
+    across the execution of an algorithm, each one takes that time on average.
+
+13. One of the data structures that we maintain is a list dist where dist[u] is the best distance known for u so far. 
+At the beginning, dist[s] = 0, and for every other node dist[u] = infinity. 
+These distances improve during the algorithm as we consider new paths. 
+Our goal is to get to the point where dist contains the correct distance for every node.
+
+14. During the algorithm, the dist list is only updated through an operation called "relaxing" an edge.
+
+        def relax(u,v,l): #l is the length of the edge (u,v)
+            if dist[u] + l < dist[v]:
+                dist[v] = dist[u] + l
+In words, relaxing an edge (u,v) means checking if going to u first and then using the edge (u,v) is shorter than the best distance known for v. If it is shorter, then we update dist[v] to the new, better value.
+
+15. Dijkstra's algorithm is based on the following observations:
+
+->  if dist[u] is correct and the shortest path from s to v ends in the edge (u,v), then if we relax the edge (u,v), 
+    we will find the correct distance to v. If either of the conditions are not satisfied, relaxing (u,v) 
+    may improve dist[v], but it will not be the correct distance.
+
+->  To find the correct distance to v, we need to relax all the edges in the shortest path from s to v, in order. 
+    If we do it in order, each node in the path will have the correct distance when we relax the edge to the next node, 
+    satisfying the conditions.
+

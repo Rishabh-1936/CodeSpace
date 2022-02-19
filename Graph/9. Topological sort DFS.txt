@@ -1,0 +1,34 @@
+In topological sort:-> Liner ordering of vertices such that if there is an edge b/w u->v, so u appears before v in that ordering.
+
+1. The graph should be DAG-> Directed Acylic Graph.
+
+2. This kind of sorting is used when we need to arrange the items depending upon their dependency.
+
+3. Topological sorting of vertices of a Directed Acyclic Graph is an ordering of the vertices
+  in such a way, that if there is an edge directed towards vertex  from vertex , then  comes before .
+
+4. There are multiple topological sorting possible for a graph. 
+
+5. In DFS implementation we need one stack in which we store the node when it's all adjacent nodes are visited(that is at-last), so that 
+to maintain the concept of dependency, like the in directed graph the adjacent nodes can only be visited when their parent nodes 
+are visited.
+
+6. Pesudocode (DFS implementation):
+
+T = []
+visited = []
+
+topological_sort( cur_vert, N, adj[][] ){
+    visited[cur_vert] = true
+    for i = 0 to N
+        if adj[cur_vert][i] is true and visited[i] is false
+        topological_sort(i)
+    T.insert_in_beginning(cur_vert)
+}
+
+Now, this tree could have edges of different types, for example, forward edges, tree edges, cross edges, and back edges. So, before moving further, let’s have a brief introduction of these kinds of edges:
+
+7. A forward edge is an edge that connects a node to its descendent without being a part of the DFS tree.
+8. Tree edges are the edges obtained by the DFS traversal of the graph.
+9. A cross edge is an edge that joins two vertices, which don’t have a parent-child relationship among themselves.
+10. A back edge is an edge that connects a vertex to its ancestor in the DFS tree, and if a DFS tree of a graph has a back edge, it contains a cycle, as the back edge will allow it to have a trail with repeated first and last nodes. 

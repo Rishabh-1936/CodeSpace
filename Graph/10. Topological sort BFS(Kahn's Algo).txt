@@ -1,0 +1,52 @@
+Kahn's Algorithm : Topological Sort using BFS.
+-----------------------------------------------
+
+In topological sort:-> Liner ordering of vertices such that if there is an edge b/w u->v, so u appears before v in that ordering.
+
+1. The graph should be DAG-> Directed Acylic Graph.
+
+2. This kind of sorting is used when we need to arrange the items depending upon their dependency.
+
+3. Topological sorting of vertices of a Directed Acyclic Graph is an ordering of the vertices
+  in such a way, that if there is an edge directed towards vertex  from vertex , then  comes before .
+
+4. There are multiple topological sorting possible for a graph. 
+
+5. In BFS implementation we need one array(let it be indegree) in which we store the indegree of nodes, and one queue in which 
+we store the node for traversal whose indegree becomes zero. The basic idea behind BFS implementation is that,
+we are traversing the queue until it become empty and in queue we are pushing those nodes whose indegree is 0.
+So when we traverse any node, so its adjacent are also traversed, then the indegree of those adjacent is reduced by one.
+
+The main concept is that we are removing the depencency of the adjacent nodes on which they are depend from the graph by reducing 
+their indegree by one every time they traversed as the parent node which is chosen for traversal is now removed from the graph.
+
+6. Pesudocode (BFS implementation):
+
+topological_sort(N, adj[N][N])
+        T = []
+        visited = []
+        in_degree = []
+        for i = 0 to N
+                in_degree[i] = visited[i] = 0
+
+        for i = 0 to N
+                for j = 0 to N
+                        if adj[i][j] is TRUE
+                                in_degree[j] = in_degree[j] + 1
+
+        for i = 0 to N
+                if in_degree[i] is 0
+                        enqueue(Queue, i)
+                        visited[i] = TRUE
+
+        while Queue is not Empty
+                vertex = get_front(Queue)
+                dequeue(Queue)
+                T.append(vertex)
+                for j = 0 to N
+                        if adj[vertex][j] is TRUE and visited[j] is FALSE
+                                in_degree[j] = in_degree[j] - 1
+                                if in_degree[j] is 0
+                                        enqueue(Queue, j)
+                                        visited[j] = TRUE
+        return T

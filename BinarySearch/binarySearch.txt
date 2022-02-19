@@ -1,0 +1,142 @@
+    int search(vector<int>& nums, int target) {
+        int n = nums.size(),k=0;
+        for(int i=n/2; i>=1;i/=2){
+            while(k+i<n && nums[k+i]<=target){
+                k+=i;
+                }
+        }
+        if(nums[k]==target){
+            return k;
+        }
+        return -1;
+    }
+    The complexity of this approach is also logN as the while loop is executed at most 2 times. But this approach is pretty optimal
+    as this has a concept of fast to slow speed when reaching close to the target.
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+There are 4 templates mostly used by the developers for implementing binary search in different scenarios:
+
+Template-1 (need exact element if found)
+-----------
+
+int binarySearch(vector<int>& nums, int target){
+  if(nums.size() == 0)
+    return -1;
+
+  int left = 0, right = nums.size() - 1;
+  while(left <= right)
+  {
+    // Prevent (left + right) overflow
+    int mid = left + (right - left) / 2;
+  
+    if(nums[mid] == target){ return mid; }
+    else if(nums[mid] < target) { left = mid + 1; }
+    else { right = mid - 1; }
+  }
+
+  // End Condition: left > right
+  return -1;
+}
+
+======================================================================================
+
+Template-2 (need right neighbour element if found)
+-----------
+
+int binarySearch(vector<int>& nums, int target){
+  if(nums.size() == 0)
+    return -1;
+
+  int left = 0, right = nums.size();
+  while(left < right){
+    // Prevent (left + right) overflow
+    int mid = left + (right - left) / 2;
+    if(nums[mid] == target){ return mid; }
+    else if(nums[mid] < target) { left = mid + 1; }
+    else { right = mid; }
+  }
+
+  // Post-processing:
+  // End Condition: left == right
+  if(left != nums.size() && nums[left] == target) return left;
+  return -1;
+}
+
+*****************************
+Distinguishing Syntax:
+
+Initial Condition: left = 0, right = length
+Termination: left == right
+Searching Left: right = mid
+Searching Right: left = mid+1
+
+
+======================================================================================
+
+Template-3 (need left neighbour element if found)
+-----------
+
+int binarySearch(vector<int>& nums, int target){
+  if(nums.size() == 0)
+    return -1;
+
+  int left = 0, right = nums.size();
+  while(left < right){
+    // Prevent (left + right) overflow
+    int mid = left + (right - left) / 2;
+    if(nums[mid] == target){ return mid; }
+    else if(nums[mid] < target) { left = mid; }
+    else { right = mid - 1; }
+  }
+
+  // Post-processing:
+  // End Condition: left == right
+  if(left != nums.size() && nums[left] == target) return left;
+  return -1;
+}
+
+
+
+======================================================================================
+
+Template-4 (need right and left neighbour element if found)
+-----------
+Template #4 is another unique form of Binary Search. It is used to search for an element or condition which 
+requires accessing the current index and its immediate left and right neighbor's index in the array.
+
+
+
+int binarySearch(vector<int>& nums, int target){
+    if (nums.size() == 0)
+        return -1;
+
+    int left = 0, right = nums.size() - 1;
+    while (left + 1 < right){
+        // Prevent (left + right) overflow
+        int mid = left + (right - left) / 2;
+        if (nums[mid] == target) {
+            return mid;
+        } else if (nums[mid] < target) {
+            left = mid;
+        } else {
+            right = mid;
+        }
+    }
+
+    // Post-processing:
+    // End Condition: left + 1 == right
+    if(nums[left] == target) return left;
+    if(nums[right] == target) return right;
+    return -1;
+}
+
+
+
+*********************************************
+Distinguishing Syntax:
+
+Initial Condition: left = 0, right = length-1
+Termination: left + 1 == right
+Searching Left: right = mid
+Searching Right: left = mid

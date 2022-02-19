@@ -1,0 +1,7 @@
+There is different concept for detecting cycle in Directed graphs, as checking for the closed loop is not the factor for cycle detection.
+Because a closed is only formed when the direction of all the nodes are making a circular loop. So the concept of checking the
+parent is not applicable(that is if the parent of the adjacent node is different then it means there is a loop.)
+
+So in this we will maintain a 2 arrays one is visited and another one is for DFS visited.
+So if we found a node which is visited in both the arrays then it is considered to be a closed loop as DFS traversal is always in a 
+single direction.

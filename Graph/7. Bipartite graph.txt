@@ -1,0 +1,29 @@
+1. Bipartite graph in general are the graph that can be coloured using 2 colors such that no 2 adjacent nodes have the same color.
+
+2. It is also called bi-graph.
+
+3. Bipartite graph is equivalent to 2-colorable graph.
+
+4. All Acyclic graphs are Bipartite.
+
+5. A cyclic graph is Bipartite iff all its cycles are of even length.
+
+6. If there is any odd length cyclic then that graph cannot be Bipartite. 
+
+7. As per the bookish defination, a Bipartite graph is a set of graph vertices, i.e, points where multiple lines meet, 
+   decomposed into 2 disjoint sets. The vertices are divided into 2 independent sets where every edge connects are vertex  
+   from both disjoint/independent sets.
+
+8. A Bipartite graph is a  special case of k-partite graph where k=2.
+
+9. A graph with no edges i.e n components is also Bipartite graph.
+
+10. According to the Bipartite condition, all edges should be from one set to another.
+
+11. BFS and DFS both can be used to check whether the graph is Bipartite or not with T.C = O(V+E)
+
+12. Every tree is a Bipartite graph.
+
+Example:
+check wikipedia for Example.
+

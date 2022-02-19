@@ -1,0 +1,137 @@
+
+Possible testcase for generating algo:
+1-> 1,2,3,4,5,6 (ascending)
+2-> 6,5,4,3,2,1 (descending)
+3-> 3,4,5,1,2 (mix)
+4-> 4,0,1,2,3 (mix)
+
+
+class Solution {
+public:
+    int findMin(vector<int>& nums) {
+                    
+        int left = 0, right = nums.size()-1, mid;
+        
+        while(left < right)
+        {
+            mid = (left + (right-left)/2);
+            
+            if(nums[mid]>nums[left])
+            {
+                // left part is sorted in ascending order
+                // then needs to check if nums[left] < nums[right]
+                // to ensure left part has minimum value
+
+                if(nums[left] < nums[right]){
+                    right = mid;
+                }
+                else{
+                    left = mid+1;
+                }
+            }
+            else if(nums[mid]>nums[right])
+            {
+                // right part may be sorted in descending order
+                // then needs to check if nums[left] > nums[right]
+                // to ensure right part has minimum value 
+
+                if(nums[left]>nums[right]){
+                    left=mid+1;
+                }
+                else{
+                    right=mid;
+                }
+            }
+            else{
+                 right=mid;
+            }
+        }
+        return nums[left];    
+    }
+};
+
+
+/////////////////////////////
+
+In this problem, we have only three cases.
+
+Case 1. The leftmost value is less than the rightmost value in the list: This means that the list is not rotated.
+e.g> [1 2 3 4 5 6 7 ]
+
+Case 2. The value in the middle of the list is greater than the leftmost and rightmost values in the list.
+e.g> [ 4 5 6 7 0 1 2 3 ]
+
+Case 3. The value in the middle of the list is less than the leftmost and rightmost values in the list.
+e.g> [ 5 6 7 0 1 2 3 4 ]
+
+As you see in the examples above, if we have case 1, we just return the leftmost value in the list. If we have case 2, we just move to the right side of the list. 
+If we have case 3 we need to move to the left side of the list.
+
+int findMin(vector<int>& nums) {
+        
+    int left = 0,  right = nums.size() - 1;
+        
+    while(nums[left] > nums[right]) {
+ 
+        int mid = (left + right)/2;
+        if(nums[mid] > nums[right])
+            left = mid + 1;
+        else
+            right = mid;
+    }
+    return nums[left];
+}
+
+
+////////////////////////////////
+
+if you clearly notice the problem then you just need to find inflection point
+
+
+class Solution {
+  public int findMin(int[] nums) {
+    // If the list has just one element then return that element.
+    if (nums.length == 1) {
+      return nums[0];
+    }
+
+    // initializing left and right pointers.
+    int left = 0, right = nums.length - 1;
+
+    // if the last element is greater than the first element then there is no rotation.
+    // e.g. 1 < 2 < 3 < 4 < 5 < 7. Already sorted array.
+    // Hence the smallest element is first element. A[0]
+    if (nums[right] > nums[0]) {
+      return nums[0];
+    }
+    
+    // Binary search way
+    while (right >= left) {
+      // Find the mid element
+      int mid = left + (right - left) / 2;
+
+      // if the mid element is greater than its next element then mid+1 element is the smallest
+      // This point would be the point of change. From higher to lower value.
+      if (nums[mid] > nums[mid + 1]) {
+        return nums[mid + 1];
+      }
+
+      // if the mid element is lesser than its previous element then mid element is the smallest
+      if (nums[mid - 1] > nums[mid]) {
+        return nums[mid];
+      }
+
+      // if the mid elements value is greater than the 0th element this means
+      // the least value is still somewhere to the right as we are still dealing with elements
+      // greater than nums[0]
+      if (nums[mid] > nums[0]) {
+        left = mid + 1;
+      } else {
+        // if nums[0] is greater than the mid value then this means the smallest value is somewhere to
+        // the left
+        right = mid - 1;
+      }
+    }
+    return -1;
+  }
+}

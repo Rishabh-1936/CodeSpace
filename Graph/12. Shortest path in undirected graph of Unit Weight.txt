@@ -1,0 +1,11 @@
+The idea behind this is to use BFS, as BFS will explore all the nodes in a parallel manner. We just need to modify it a little.
+
+We need to keep track of the distance of each node from the source node and at last we will get the shortest path
+of all the nodes from the source node.
+
+We will push the source node with the distance 0 into the queue and then start the BFS traversal from it unitl the 
+queue is not empty. And if the distance of any node is found to be less than the previous node distance + the distance to 
+it(edge weight), then we will update the new distance and this is known as relaxation.
+
+TC = O(V+E)
+SC = O(V)

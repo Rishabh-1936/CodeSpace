@@ -1,0 +1,11 @@
+int guessNumber(int n) {
+        int mid=0,left=1,right=n,status;
+        while(true){
+            mid = left + (right-left)/2;
+            status = guess(mid);
+            if(status==0) return mid;
+            else if(status<0){right=mid-1;}
+            else left = mid+1;
+            
+        }
+    }

@@ -1,0 +1,13 @@
+As the travesal for shortest path in directed is very different from that of undirected, as in undirected, it is possible to
+traverse the whole graph/component starting from any node. But this is not the case with directed graph.
+
+So for directed graph we need to first know the order in which the nodes can be visited. The shortest distance can only 
+be found:
+
+1. when the shortest distance of the current node from the source one has been calculated yet if it is possible.
+
+2. When all the nodes from where it can be reached are travesed and their shortest distance is calculated before the 
+current node, as if it is not so then the nodes from which the current node can be reached will be having the shortest
+distance INFINITY only.
+
+So topological sort will be used to find the order in which the nodes can be traversed.
