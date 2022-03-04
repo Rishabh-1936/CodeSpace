@@ -1,0 +1,25 @@
+Kruskal's Algorithm is an Algorithm to find MST, by:
+1. By selecting the minimum edges every time( following the greedy approach)
+2. By checking everytime does the nodes already belong to the current MST to ensure there is no cycle by using disjoint–set 
+data structure(ensuring the spanning tree which has no cycle).
+
+Algorithm:
+1. Sort all the edges in the ascending order of the weight.
+2. Select one by one each edge and consider that into the current MST if the don't belong to the same component by disjoint 
+data structure.
+
+Store in the format of (weight, u, v)
+
+complexity:
+TC: 
+ = TC for edge sort + traverse all edges and performing find-union
+ = O(M*log(M)) + O(M * O(4*alpha))
+ = O(M*log(M))
+
+as there are M edges and complexity to perform find-union is 4*alpha that is constant.
+
+SC:
+ = space for storing edges + parent array + rank array
+ = O(M) + O(N) + O(N)
+ = O(N)
+ 

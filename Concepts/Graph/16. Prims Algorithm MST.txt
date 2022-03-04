@@ -1,0 +1,33 @@
+Prims Algorithm: 
+----------------
+
+Starting with the one node(like a source node) andd then proceeding with the adjacent nodes which are having the minimal 
+weight. Once all the nodes are created with the fulfillment of all criteriia of the MST then we got the MST.
+
+We need 3 arrays let it be:
+1. key:     initialized with infinity. It is used to store the edge weight associated with the node.
+            (The weight stored in key array is only the edge weight b/w the curent node and it's adjacent node. 
+            Used for picking up the nodde with minimum edge weight.)
+2. mst:     initialized with false. It is used to keep the track of nodes which are the part of the current MST(or treat is as a visited array).
+3. parent:  initialized with -1. It is used to store the parent of the nodes so as to avoid/check for cycle. It is also
+            used for the creation of the final MST. 
+
+========================================================================================================================
+
+Algorithm:
+----------
+1. Mark the weight of the source node as 0, mst as T and parent -1.
+
+2. Now traverse the adjacent of the node whose weight is minimum in the key array and update the parent array and weight array
+   as per the information. Don't update the mst array till this step.
+
+3. Now traverse the key array and pickup the node with minimum weight and if it is not forming a cycle then consider that in
+   the current MST by marking it as 'T' in mst array.
+
+4. Whenever the key array is updated, then update the parent array also, with the minimum possible weight.
+
+5. Select the node with minimum value in the key array and mark the value true in the MST array
+   and traverse its adjacent nodes and update the key and parent array. Repeat these steps until all the nodes in the
+   MST array is marked as 'True'.
+
+

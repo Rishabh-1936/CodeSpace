@@ -1,0 +1,79 @@
+Disjoint Sets are the sets in which no common element is there between two different sets. This data structure is 
+efficient in finding the relation between the nodes in O(1). 
+
+There are 2 operations which are done using Disjoint sets are find() and union(), steps as follow:
+
+1. First consider every element is having a parent of itself and belong to its own set and initialize the 'rank' array
+with value 0 which denoting the height of each set and the one with lower rank is chosen to join with the component
+of higher rank.
+
+2. Now if there is any edge or relation between two nodes then the find() of one node in the set of another node is done
+and if it found to be false then union() is performed. 
+
+3. The one with lower rank is combined with the one who is having the higher rank among those 2 node's set.
+
+4. At last all the nodes are directly connected to the parent.
+
+A disjoint–set is a data structure that keeps track of a set of elements partitioned into several disjoint (non-overlapping) 
+subsets. In other words, a disjoint set is a group of sets where no item can be in more than one set. 
+It is also called a union–find data structure as it supports union and find operation on subsets. 
+
+Find: It determines in which subset a particular element is in and returns the representative of that particular set. 
+An item from this set typically acts as a “representative” of the set.
+
+Union: It merges two different subsets into a single subset, and the representative of one set becomes representative of 
+another.
+
+void make_set(int v) {
+    parent[v] = v;
+}
+
+int find_set(int v) {
+    if (v == parent[v])
+        return v;
+    return find_set(parent[v]);
+}
+
+void union_sets(int a, int b) {
+    a = find_set(a);
+    b = find_set(b);
+    if (a != b)
+        parent[b] = a;
+}
+The above union() and find() are naive and the worst case time complexity is linear
+
+Improvements (Union by Rank and Path Compression)
+The efficiency depends heavily on the height of the tree. 
+We need to minimize the height of tree in order improve the efficiency. 
+We can use Path Compression and Union by rank methods to do so.
+
+Path Compression (Modifications to find()) : It speeds up the data structure by compressing the height of the trees. It can be achieved by inserting a small caching mechanism into the Find operation. Take a look at the code for more details:
+
+// Finds the representative of the set that i
+// is an element of.
+int find(int i) 
+{
+    // If i is the parent of itself
+    if (Parent[i] == i) 
+    {
+        // Then i is the representative 
+        return i;
+    }
+    else
+    { 
+        // Recursively find the representative.
+        int result = find(Parent[i]);
+
+        // We cache the result by moving i’s node 
+        // directly under the representative of this
+        // set
+        Parent[i] = result;
+       
+        // And then we return the result
+        return result;
+     }
+}
+The above operations can be optimized to O(Log n) in worst case. The idea is to always attach smaller depth tree under the root of the deeper tree. This technique is called union by rank. The term rank is preferred instead of height because if path compression technique (we have discussed it below) is used, then rank is not always equal to height. Also, size (in place of height) of trees can also be used as rank. 
+Using size as rank also yields worst case time complexity as O(Logn).
+
+In fact, amortized time complexity effectively becomes small constant. 

@@ -1,0 +1,68 @@
+Bridges are those edges in the graph whose remove will split the graph into 2 or more components.
+    
+        1
+    /       \
+    2       3
+    |       |
+    4-------5
+    |
+    |
+    6-------7
+    |       |
+    8       9
+    \       /
+        10
+
+In the above graph we can see that the edge 4-6 is a bridge as on its removal there are 2 components. But on the 
+removal of 4-5 or 4-2 or 1-3 and so on, the number of components remain the same that is 1. So they are not bridge. 
+
+So, for checking an edge is a bridge or not, we have 2 ways:
+
+1.  Remove edges one and then run the DFS on the remaning graoh and if the number of components are found to be increased than 1
+    then that edge is a bridge as its removal is increasing the number of components.
+    T.C : O(E.(V+E)) ~ O(E^2)
+    as we are removing one edge and running the DFS after that, so DFS is run for all edges.
+
+2.  Using the concept of Tarzan's algorithm. In this we will use the concept that if there is any back edge then in that
+sub-component there is no bridge. So to maintain this we need 2 arrays one is for "time to enter into the node(tin)" and 
+"lowest time to enter(low)". 
+
+And condition for bridge:
+    low[adjacent_node]  >   tin[current_node]
+
+algorithm:
+
+tin[node] = low[node] = timer++
+for all adjacent of node:
+    if !vis[it]
+        DFS(it)
+        low[node] = min(low[node], low[it])
+        IF_BRIDGE(it,node)
+        
+    low[node] = min(low[node], low[it])
+
+---------------------------------
+The concept can be easily understand like this:
+1.  Initially each node/edge is a separate component(as any edge may be a bridge), and consider the 'tin' stores the initial time to enter/reach that component
+    and 'low' stores the lowest possible time to reach that component.
+2.  Once we encounter the back-edge then it ensures that there is one cycle and consider the cycle as one component and 
+    assign the lowest possible to each node of that component.
+3.  So at last when we notice, we found that each node in a cyclic component are having the same 'low' value(or can be considered 
+    as a weight). 
+4.  So when low[adjacent_node]  >   tin[current_node] mets, there is a brdige. 
+    The reason behind why this condition is choose (not this :  low[adjacent_node]  <   tin[current_node]). It is because
+    this condition is checked when the DFS on a current node is completed and we have found a cyclic component if there is any.
+     ....    ....
+       \      /
+        8(8/8)       
+          |
+        9(9/9)
+      /       \
+10(10/9)     11(11/9)
+     \          /
+       12(12/9)
+
+So when the current node is at 9 then the cyclic component 9-10-12-11 all are having same 'low' value, so at this point 
+only for edge 8-9 the 1st condition is true while the 2nd condition is true for every edge. That's why 1st condition is
+the best suited one for this scenario. The 2nd condition will be true for every scenario as we are using the incremental 
+timer's value to keep track of 'tin' and 'low'.

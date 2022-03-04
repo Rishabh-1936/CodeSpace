@@ -1,0 +1,13 @@
+MST is Minimum Spanning Tree. Whenever a tree with N nodes and N-1 edges with the minimum weight is created from the 
+graph that tree such that it is possible to reach every node from every other node with the minimal posssible edge weight, 
+such tree is known as MST. 
+
+There are many MST possible for a single graph.
+
+There is no cycle (as it is a tree even if it has minimum edge weight also) as there is no cycle in the tree.
+
+The algorithms to detect whether a tree is a MST or not:
+
+1. Prims Algorithm
+2. Kruskal Algorithm
+
