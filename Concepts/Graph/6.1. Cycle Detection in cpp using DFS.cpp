@@ -11,10 +11,10 @@ bool checkForCycle(int node, int parent, vector<int> adj[], vector<int>& vis ){
             if(checkForCycle(it, node, adj, vis)){
                 return true;
             }
-            else if(it != parent)
-            {
-                return true;
-            }
+        }
+        else if(it != parent)
+        {
+            return true;
         }
     }
     return false;
