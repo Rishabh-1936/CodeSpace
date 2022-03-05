@@ -35,6 +35,7 @@ int main()
     int n; // number of vertices
     cin >> n;
     
+    // array of vectors, means each element in an array is a separate vector. 
     vector<int> adj[n];
 
     int e; // number of edges
