@@ -1,0 +1,38 @@
+It is a point on removal of which splits the graph into 2 or more components. For finding the articulation, the same concept 
+of finding the bridges is used.
+
+The 'tin' and 'low' array will be used to find the articulation point, but with a bit different condition:
+    low[adjacent_node] >= tin[node]  &&  parent != -1
+
+then that node is a articulation point.
+
+This condition is same as bridge one but here it is greater-than-equal-to instead of just greater-than. 
+The reason behind this is that if tin[current_node] > low[adjacent_node] then it means that after removing the current node
+also there is a possible way to reach the adjacent_node. That's why if the reverse of the condition is true that is 
+low[adjacent_node] >= tin[node], then that node is a articulation point.
+
+For the starting node of each component the condition: low[adjacent_node] >= tin[node]  is always true as 
+low[adjacent_node] = tin[node] (both are equal). That's why we are checking that parent != -1, which ensures
+that the node is not the parent node for that component.
+
+We need to check for the parent node separately as:
+        1
+     /  /\  \
+     2  3 4  5
+
+In case of multiple child if we remove the parent node then it will increase the number of components.
+So, we need to check if a current node is a parent node and having more than 1 child then that node is a articulation point:
+parent == -1 && child > 1.
+
+Note:
+1.  There may be possiblity that same node can be considered a articulation point several time, so for that we either use
+    set or map to eliminate the duplicacy.
+
+2.  A single node can be a articulation point in one edge/component but not a articulation point in another edge or
+    component, in case so 2 cyclic components connected using a bridge/articulation point.
+
+3.  Can be solved by the bridge algorithm, as there is a relation b/w bridge and articulation point is that the endpoints
+    of a bridge are the articulation points, so by mainitaining a set of points we can find them also.  
+
+4.  TC: O(V+E) as running DFS only
+    SC:O(3*V) = O(V)

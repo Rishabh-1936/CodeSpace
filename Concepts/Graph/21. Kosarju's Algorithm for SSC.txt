@@ -1,0 +1,22 @@
+Kosarju's Algorithm helps to the find all the strongly connected components in a directed graph.
+
+A strongly connected component is a component in which every node is reachable from any other node.
+
+    1 -* 2 -* 4
+    *    /    |
+    |   *     *
+      3       5
+
+Here, 1-2-3 is a SSC, 4 is a SSC and 5 is a SSC. So total 3 SSC are there in the above graph.
+
+There are 3 steps in Kosarju's Algorithm to find all SSCs:
+1.  Sort all the nodes according to the order of their finishing time (Topological Sort), and store the order into the stack.
+2.  Transpose the graph.(means reverse the direction of all the edges).
+3.  Perform DFS on the Transpose graph according to the finishing time of the nodes evaluated in the step-1.
+
+T.C :   TC step1 + TC step2 + TC step3 
+        O(N+E) + O(N+E) + O(N+E) ~ O(N+E) 
+        
+        
+S.C :   SC for graph + visited array + stack
+        O(N+E) + O(N) + O(N) ~ O(N)

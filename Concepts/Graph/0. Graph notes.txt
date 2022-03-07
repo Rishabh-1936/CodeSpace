@@ -1,0 +1,12 @@
+1.  For undirected graph, the sum of all degrees is 2E where E is the number of edges, because each edge increases the degree of 
+exactly two nodes by one. For this reason, the sum of degrees is always even.
+
+2.  A graph is regular if the degree of every node is a constant d. A graph is complete if the degree of every node is n−1, i.e., 
+the graph contains all possible edges between the nodes.
+
+3.  A graph is simple if no edge starts and ends at the same node, and there are no multiple edges between two nodes. 
+Often we assume that graphs are simple. Simple graph has no self loop.
+
+4. Applications of graph Traversal : Connectivity check, Finding cycles, Bipartiteness check
+
+

@@ -44,6 +44,7 @@ bool checkForCycle(int s, int v, vector<int> adj[], vector<int>& vis )
                 parent[it] = node;
             }
             else if(par != it)
+            // or else if(parent[node] != it)
             {
                 return true;
             }

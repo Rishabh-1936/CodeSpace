@@ -72,7 +72,7 @@ int main()
     	}
 
     	Solution obj;
-    	cout << obj.isCyclic(V, adj) << "\n";
+    	cout << obj.topo(V, adj) << "\n";
     }
 
     return 0;
