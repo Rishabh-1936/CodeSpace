@@ -7,6 +7,11 @@ the graph contains all possible edges between the nodes.
 3.  A graph is simple if no edge starts and ends at the same node, and there are no multiple edges between two nodes. 
 Often we assume that graphs are simple. Simple graph has no self loop.
 
-4. Applications of graph Traversal : Connectivity check, Finding cycles, Bipartiteness check
+4. Applications of graph Traversal : Connectivity check, Finding cycles, Bipartiteness check.
+
+5. A Graph can be a tree if it has only 1 component and no-cycles. So we can ensure this by 2-ways:
+    1.  By checking the number of components & the detecting cycle.
+    2.  By checking the number of components & if number of edges = n-1 then also it is a tree. As whenever there is only 1 component
+        which is covering all the nodes then if the egdes = n-1 then it is surely a tree.
 
 
