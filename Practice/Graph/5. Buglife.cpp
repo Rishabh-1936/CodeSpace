@@ -7,10 +7,12 @@ bool checkExperiment(int node, int gen, vector<int> &gender, vector<int> adj[]){
     gender[node] = gen;
     for(auto it: adj[node]){
         if(gender[it] == -1){
+            // returns when experiment is false
             if(!checkExperiment(it, 1 - gen, gender, adj)){
                 return false;
             }
         }
+        // bugs with same gender interacts and returns as experiment is false
         else if(gender[it] == gen){
             return false;
         }
