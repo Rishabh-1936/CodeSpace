@@ -1,6 +1,6 @@
 /*
     Problem on Codechef : https://www.codechef.com/problems/FIRESC 
-    TAGS: depth-first-search, simple, union-find
+    TAGS: depth-first-search, simple, union-find, connected components
 
     Approach:
     1. As to maximize the number of exits we are counting the number of components as friends are sharing the same exits and to maximize
