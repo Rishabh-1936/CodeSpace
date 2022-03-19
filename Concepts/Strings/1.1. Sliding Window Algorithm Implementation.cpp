@@ -43,6 +43,21 @@ int main()
     }
   }
 
+
+// Another Implementation
+  int flag;
+  for(int i = 0; i < LT; ++i){
+    flag = 1;
+    for(int j = 0; j < LP; ++j){
+      if(T[i+j] != P[j]){
+        flag=0;
+        break;
+      }
+    }
+    if(flag){
+      cout << i << " ";
+    }
+  }
 }
 
 /*
