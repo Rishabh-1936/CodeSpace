@@ -1,0 +1,29 @@
+1.  Same Strings must have the same hash value.
+
+2.  Same hash values means strings may be same.
+
+3.  It is possible that 2 different strings have same hash. When 2 different strings have same hash values, it is known as collision.
+
+4.  Polynomial Rolling hash
+
+    hash(s) = (s[0]*p^0 + s[1]*p^1 + s[2]*p^2 + ..... + s[n-1]*p^n-1) mod m
+            
+            =   (from i = 0 to i = n-1) summation(s[i]*p^i) mod m
+
+where p is a prime number
+
+EX: 
+Assumption:
+1. (P >= size of charater set). As only lower case letters are there so take p any prime number > 26. So for both P>52.
+2. each alphabet is mapped to number value starting from 1, like a = 1, b=2,....z=26
+3. mapping is not started from 0 because it will leads to collision for the string a,aa,aaa,aaa... As hash value for all will only be 0.
+
+hash("code") = c*p^0 + o*p^1 + d*p^2 + e*p^3
+
+5.  Why to use modulo?
+-> To avoid integer overflow. As the power of 'p' is increasing so the hash values increases exponentially. So for 'p = 11' and
+for integer = 10 charaters it will overflow and for 'long long int = 20 characters' it will overflow.
+
+
+6.  Why p > |charater set|?
+-> To reduce collisions.
