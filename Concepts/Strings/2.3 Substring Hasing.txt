@@ -1,0 +1,53 @@
+1.  String length                                           :  N
+2.  Pre-calculate hsh of whole string                       :  O(N)
+3.  Modulo-Inverse preprocessing                            :  O(Nlog(N))
+4.  Calculating hash of any substring of the given string   :  O(1)
+
+
+    hash("coding") = c*p^0 + o*p^1 + d*p^2 + i*p^3 + n*p^4 + g*p^5
+
+Hash value of the substring "din" of string "coding"
+
+    hash("din") = d*p^0 + i*p^1 + n*p^2
+
+The realtion b/w the hash value of "din" with "coding" is 
+    (d*p^2 + i*p^3 + n*p^4) / p^2
+
+As we are taking modulo for multiplication so simple divison can't be done. So inverse modulo multiplication is done.
+
+Brief:
+    10 / 5 = 2
+    To replace divide from multiplication we need to find the multiplicative inverse of denominator i.e. '5'.
+    5*a = 1
+    so a = 1/5 = 0.2
+    Hence, 10 * 0.2 = 2
+
+    Similarly, with division:
+    (6/2) % 5 = 1
+    but ((6 % 5)/(2 % 5)) % 5 = (1/2) % 5 = 0 
+    so modulo formula can't be applied over the division, so for that we need inverse modulo.
+    
+    (A/B) % P = (A*X) % P = ((A % P) * (X % P)) % P
+    where X is the modulo multiplicative inverse of B
+
+    The formula for modulo multiplicative inverse is:
+        A*X = 1 mod p
+    X is a modulo multiplicative inverse of A, such that multiplying A with X gives the same result as 1 % P
+    When GCD(A,X) = 1, i.e both are co-prime, only then the modulo multiplicative inverse is calculated.
+
+    Ex:
+    2*X = 1 mod 5
+    so when looping till p-1 we found X = 3, as 2*3 = 6 % 5 = 1
+    so, (6/2) % 5 = (6*3)%5 = 3.
+
+dp[i] = hash value of substring(0,i)
+for "coding" , dp[] array will look like this
+dp[0] = c*p^0
+dp[1] = c*p^0 + o*p^1 
+dp[2] = c*p^0 + o*p^1 + d*p^2 
+dp[3] = c*p^0 + o*p^1 + d*p^2 + i*p^3 
+dp[4] = c*p^0 + o*p^1 + d*p^2 + i*p^3 + n*p^4 
+dp[5] = c*p^0 + o*p^1 + d*p^2 + i*p^3 + n*p^4 + g*p^5
+
+hash(substring(L, R)) = (dp[R] - dp[L-1]) / p^L
+as for "din" L = 2 and R = 4 as per "coding"
