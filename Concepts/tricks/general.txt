@@ -1,0 +1,6 @@
+1.
+    upper_bound(Set.begin(), Set.end(), x) is a function that doesn't know anything about std::set internal structure. 
+    Set iterators are not random-access meaning that upper_bound has to perform O(n) iterator movements in order to access any 
+    position in the container. 
+    That's why you should never use lower_bound/upper_bound with std::set, but you can use Set.lower_bound(x)/Set.upper_bound(x) 
+    that perform a search over a binary search tree, that works obviously in.
