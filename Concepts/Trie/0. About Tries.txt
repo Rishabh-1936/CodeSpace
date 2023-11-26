@@ -1,0 +1,32 @@
+Tries=> Re-Trie-val
+Fast retrival
+
+--------
+
+Applications:
+1. Auto complete
+2. Recommendation System
+
+------------
+
+Unlike a hash table, there are no collisions in a trie. However, duplicate keys cannot be allowed in a trie, so no two keys have the same path.
+
+----------
+
+Tries vs. Sets
+Say you were implementing a spell checker. You'll look for each word to see if it appears in Merriam-Webster's dictionary.
+
+You could put all the dictionary words in a trie. Or, you could put them in a set.
+
+Both options have the same average-case lookup complexity: O(k)O(k), where kk is the number of characters in the lookup string:
+
+For the trie, you'd have to walk from the root of the trie through kk nodes, one character at a time.
+For the hash set, you have to compute a hash value from all kk characters of the string in order to index into the underlying array.
+So, if they have the same complexity, which one should you use?
+
+Use a trie if you want to quickly find words starting with the same prefix. In our spell checker, this might be useful for suggesting corrections (i.e.: fixing "chocolatr" to "chocolate"). The only way to do this with a hash set would be to iterate through all the words, in O(n)O(n) time.
+
+Use a hash set if you just need to check if a string is present or you're optimizing for space. In most cases, a hash set will take up fewer bytes than a trie. And, hash set lookups will probably be faster than trie lookups—trie nodes can be scattered throughout memory, which isn't cache friendly.
+
+Hash sets aren't cache-friendly either. But with a hash set, you usually make one non-sequential memory lookup, versus kk of them with a trie. (Here, kk is the number of characters in the string.)
+
